@@ -5,4 +5,5 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world.")
+    resdict = {"resstr": "test"}
+    return render(request, "event/index.html", resdict)
