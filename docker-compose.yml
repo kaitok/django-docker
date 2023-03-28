@@ -23,3 +23,4 @@ services:
     environment:
       MYSQL_DATABASE: 'django'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
