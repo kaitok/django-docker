@@ -5,6 +5,11 @@
     <title>タイトル</title>
   </head>
   <body>
-    <p>{{ resstr }}</p>
+    {% block title %}イベント新規作成{% endblock %} {% block content %}
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">送信</button>
+    </form>
+    {% endblock %}
   </body>
 </html>
