@@ -5,11 +5,26 @@
     <title>タイトル</title>
   </head>
   <body>
-    {% block title %}イベント新規作成{% endblock %} {% block content %}
-    <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">送信</button>
-    </form>
-    {% endblock %}
+    <table>
+      <tr>
+        <th>タイトル</th>
+        <th>text</th>
+        <th>開始日時</th>
+        <th>終了日時</th>
+        <th>メール</th>
+        <th>電話番号</th>
+      </tr>
+
+      {% for event in event_list %}
+      <tr>
+        <td>{{ event.title }}</td>
+        <td>{{ event.text }}</td>
+        <td>{{ event.start_datetime }}</td>
+        <td>{{ event.end_datetime }}</td>
+        <td>{{ event.mail }}</td>
+        <td>{{ event.tel_number }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>
