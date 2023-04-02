@@ -1,11 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView
 from .forms import EventForm
 from .models import Event
 
 
-def createView(request):
+def indexView(request):
+    qs = Event.objects.all()
+    ctx = {}
+    ctx["event_list"] = qs
     template_name = "event/index.html"
+    return render(request, template_name, ctx)
+
+
+def createView(request):
+    template_name = "event/create.html"
     form = EventForm(request.POST or None)
     ctx = {"form": form}
     if form.is_valid():
