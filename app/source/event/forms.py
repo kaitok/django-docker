@@ -43,3 +43,11 @@ class EventForm(forms.ModelForm):
         if len(tel_number) < 10:
             raise forms.ValidationError('電話番号は10桁以上で入力してください。')
         return tel_number
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_day = cleaned_data['start_datetime']
+        end_day = cleaned_data['end_datetime']
+        if start_day > end_day:
+            raise forms.ValidationError("開始日は終了日より前にしてください。")
+        return cleaned_data
