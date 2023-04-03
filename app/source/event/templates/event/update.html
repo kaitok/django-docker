@@ -2,10 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>イベント新規作成</title>
+    <title>イベント編集</title>
   </head>
   <body>
-    {% block title %}イベント新規作成{% endblock %} {% block content %}
+    {% block title %}イベント編集{% endblock %} {% block content %}
     <form method="POST">
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">送信</button>
