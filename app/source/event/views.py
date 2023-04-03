@@ -16,7 +16,7 @@ class CreateView(CreateView):
     model = Event
     form_class = EventForm
     template_name = "event/create.html"
-    success_url = reverse_lazy('event:event-index')
+    success_url = reverse_lazy('event:index')
 
     def form_valid(self, form):
         postdata = form.save(commit=False)
@@ -28,7 +28,7 @@ class UpdateView(UpdateView):
     model = Event
     form_class = EventForm
     template_name = "event/update.html"
-    success_url = reverse_lazy('event:event-index')
+    success_url = reverse_lazy('event:index')
 
     def form_valid(self, form):
         postdata = form.save(commit=False)

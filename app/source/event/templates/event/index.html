@@ -6,7 +6,7 @@
   </head>
   <body>
     <div>
-      <a href="{% url 'event:event-create' %}">Create Event</a>
+      <a href="{% url 'event:create' %}">Create Event</a>
     </div>
     <table>
       <tr>
@@ -29,15 +29,12 @@
         <td>
           <a
             class="btn btn-primary btn-sm"
-            href="{% url 'event:event-update' pk=event.id %}"
+            href="{% url 'event:update' pk=event.id %}"
             role="button"
             >編集</a
           >
           {% comment %}
-          <form
-            method="POST"
-            action="{% url 'event:event-delete' pk=event.id %}"
-          >
+          <form method="POST" action="{% url 'event:delete' pk=event.id %}">
             {% csrf_token %}
             <button
               type="button"
