@@ -33,19 +33,11 @@
             role="button"
             >編集</a
           >
-          {% comment %}
-          <form method="POST" action="{% url 'event:delete' pk=event.id %}">
-            {% csrf_token %}
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#deleteModal-{{event.id}}"
-            >
-              削除
-            </button>
-          </form>
-          {% endcomment %}
+        </td>
+        <td>
+          <button onclick="location.href='{% url 'event:delete' event.pk %}'">
+            削除
+          </button>
         </td>
       </tr>
       {% endfor %}

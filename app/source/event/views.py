@@ -34,3 +34,8 @@ class UpdateView(UpdateView):
         postdata = form.save(commit=False)
         postdata.save()
         return super().form_valid(form)
+
+
+class DeleteView(DeleteView):
+    model = Event
+    success_url = reverse_lazy('event:index')
