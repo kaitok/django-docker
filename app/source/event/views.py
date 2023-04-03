@@ -1,36 +1,49 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .forms import EventForm
 from .models import Event
 
 
-def indexView(request):
-    qs = Event.objects.all()
-    ctx = {}
-    ctx["event_list"] = qs
+class IndexView(ListView):
+    model = Event
     template_name = "event/index.html"
-    return render(request, template_name, ctx)
+    paginate_by = 5
 
 
-def createView(request):
+class CreateView(CreateView):
+    model = Event
+    form_class = EventForm
     template_name = "event/create.html"
-    form = EventForm(request.POST or None)
+    success_url = reverse_lazy('event:event-index')
+
+    def form_valid(self, form):
+        postdata = form.save(commit=False)
+        postdata.save()
+        return super().form_valid(form)
+
+
+def updateView(request, pk):
+    template_name = "event/create.html"
+    obj = Event.objects.get(pk=pk)
+    initial_values = {
+        "title": obj.title,
+        "text": obj.text,
+        "start_datetime": obj.start_datetime,
+        "end_datetime": obj.end_datetime,
+        "mail": obj.mail,
+        "tel_number": obj.tel_number,
+    }
+    form = EventForm(request.Post or initial_values)
     ctx = {"form": form}
     if form.is_valid():
-        title = form.cleaned_data["title"]
-        text = form.cleaned_data["text"]
-        start_datetime = form.cleaned_data["start_datetime"]
-        end_datetime = form.cleaned_data["end_datetime"]
-        mail = form.cleaned_data["mail"]
-        tel_number = form.cleaned_data["tel_number"]
-        obj = Event(
-            title=title,
-            text=text,
-            start_datetime=start_datetime,
-            end_datetime=end_datetime,
-            mail=mail,
-            tel_number=tel_number
-        )
+        obj.title = form.cleaned_data["title"],
+        obj.text = form.cleaned_data["text"],
+        obj.start_datetime = form.cleaned_data["start_datetime"],
+        obj.end_datetime = form.cleaned_data["end_datetime"],
+        obj.mail = form.cleaned_data["mail"],
+        obj.tel_number = form.cleaned_data["tel_numbe"]
         obj.save()
+
     return render(request, template_name, ctx)
