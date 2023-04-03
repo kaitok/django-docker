@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>タイトル</title>
+    <title>イベント一覧</title>
   </head>
   <body>
     <div>
@@ -26,6 +26,30 @@
         <td>{{ event.end_datetime }}</td>
         <td>{{ event.mail }}</td>
         <td>{{ event.tel_number }}</td>
+        <td>
+          <a
+            class="btn btn-primary btn-sm"
+            href="{% url 'event:event-update' pk=event.id %}"
+            role="button"
+            >編集</a
+          >
+          {% comment %}
+          <form
+            method="POST"
+            action="{% url 'event:event-delete' pk=event.id %}"
+          >
+            {% csrf_token %}
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteModal-{{event.id}}"
+            >
+              削除
+            </button>
+          </form>
+          {% endcomment %}
+        </td>
       </tr>
       {% endfor %}
     </table>
