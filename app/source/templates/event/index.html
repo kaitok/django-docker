@@ -1,23 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>イベント一覧</title>
-  </head>
-  <body>
-    <div>
-      <a href="{% url 'event:create' %}">Create Event</a>
-    </div>
-    <table>
-      <tr>
-        <th>タイトル</th>
-        <th>text</th>
-        <th>開始日時</th>
-        <th>終了日時</th>
-        <th>メール</th>
-        <th>電話番号</th>
-      </tr>
-あああ
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+      <ul class="nav justify-content-end p-3">
+        <li class="nav-item">
+          <a href="{% url 'event:create' %}" class="btn btn-primary btn-sm">Create Event</a>
+        </li>
+      </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>text</th>
+          <th>開始日時</th>
+          <th>終了日時</th>
+          <th>メール</th>
+          <th>電話番号</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
       {% for event in event_list %}
       <tr>
         <td>{{ event.title }}</td>
@@ -33,14 +38,13 @@
             role="button"
             >編集</a
           >
-        </td>
-        <td>
-          <button onclick="location.href='{% url 'event:delete' event.pk %}'">
+          <button onclick="location.href='{% url 'event:delete' event.pk %}'" class="btn btn-danger btn-sm">
             削除
           </button>
         </td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
-  </body>
-</html>
+  </div>
+{% endblock %}
