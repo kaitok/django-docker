@@ -5,9 +5,9 @@ services:
     container_name: app
     build: ./app
     volumes:
-     - ./app/source:/django
+      - ./app/source:/django
     ports:
-     - 8001:8000
+      - 8001:8000
     image: app:django
     entrypoint:
       - dockerize
@@ -16,6 +16,7 @@ services:
       - -wait
       - tcp://mysql:3306
     command: python manage.py runserver 0.0.0.0:8000
+    tty: true
     depends_on:
       - db
   db:
