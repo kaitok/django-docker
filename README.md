@@ -16,4 +16,6 @@ python app/source/config/get_random_secret_key.py > app/source/config/local_sett
 
 ## Run
 
+```
 docker compose up -d
+```
